@@ -145,8 +145,8 @@ export class LoginPage {
   private readonly auth = getAuth(this.firebaseApp);
   protected readonly status = signal<"idle" | "success" | "error">("idle");
   protected loginModel = signal<LoginData>({
-    email: "wilsonvarela13@hotmail.com",
-    password: "123456",
+    email: "",
+    password: "",
   });
 
 
