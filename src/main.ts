@@ -14,13 +14,7 @@ import {
   registerPlatformComponents,
 } from "@ng-native/fabric";
 import { App } from "./app/app.ts";
-import {
-  PreloadAllModules,
-  withComponentInputBinding,
-  withPreloading,
-} from "@angular/router";
-import { provideNativeRouter } from "@ng-native/router";
-import { routes } from "./app/app.route.ts";
+import { appConfig } from "./app/app.config.ts";
 
 registerPlatformComponents(Platform.OS);
 
@@ -28,13 +22,6 @@ AppRegistry.registerRunnable(
   "main",
   ({ rootTag }: { rootTag: number | string }) => {
     const app = mount(Number(rootTag), App, getFabricUIManager(), {
-      providers: [
-        provideNativeRouter(
-          routes,
-          withComponentInputBinding(),
-          withPreloading(PreloadAllModules),
-        ),
-      ],
       // Colours, as the integers the platform wants.
       processColor,
       // What `@media` resolves against. Without it every media query is false and a responsive
@@ -45,6 +32,7 @@ AppRegistry.registerRunnable(
       tokens: deviceTokens(),
       // Turns a `require('./x.png')` into something native can load. Without it images are blank.
       resolveAssetSource: (value) => Image.resolveAssetSource(value as never),
+      ...appConfig,
     });
 
     // Re-resolves the conditions when the device rotates or the theme changes. A rotation dirties

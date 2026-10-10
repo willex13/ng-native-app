@@ -4,6 +4,6 @@ export const routes: Routes = [
   { path: "", pathMatch: "full", redirectTo: "home" },
     {
         path: 'home', 
-        loadComponent: () => import('./features/home/home.page.ts').then(l => l.HomePage),
+        loadComponent: () => import('./features/login/login.page.ts').then(l => l.LoginPage),
     },
 ];
